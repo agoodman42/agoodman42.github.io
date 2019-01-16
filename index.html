@@ -1,29 +1,175 @@
-<HTML>
-<Head>
-	<title>
-		Let there be Html
-	</title>
-</head>
-<body>
-	<p> I'm learning to program today</p>
-	<p><p>
-	<p> Ok, not entirely today</p>
-	<ol> 
-		<li> grow a beard </li>
-		<li> GIT with the program </li>
-		<li> Hack away a little each day </li>
-		<li> Learn HTML </li>
-		<li> Learn CSS </li>
-		<li> Learn Javascript </li>
-		<li> Learn Ruby/Rails </li>
-		<li> Learn Python </li>
-		<li> Decide on Java or Objective C </li>
-		<li> Win </li>
-	</ol>
+<!DOCTYPE html>
+<html>
+    <!-- UA Web Push: ef2178d505:1544031377431 -->
+    <head>
+        <meta charset="utf-8">
+        <title>push playground</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    </head>
 
-	<p>
-		2/10/2015
-		This weekend I embarked on a difficult, and exciting exercise. A crash course in web development in time for the Instrument deadline early next month. I can't believe it's already the 10th.
-		I started with some very basic and incomplete knowledge. I'd taken a couple java classes in college in 2009, and I'd dabbled in python starting and stopping close to 4 times. I've taken this as my challenge to get it done, to make a real dent in growing my skillset as a programmer. With the internet as my guide, and my programmer friends I've begun. This last weekend I spent both days working through tutorials on HTML/CSS and Javascript. I finished HTML and CSS Sunday night ( a little behind schedule as I was expecting to have a tic tac toe game up on github by monday evening. We've revised the timeline to having a working tic tac toe game by friday of this week, swapping in a task that was easier, and further down the timeline) I don't feel great about moving the timeline, however I am willing to admit that a fully functional tic tac toe game was a bit ambitious for what I was trying to do. Last night I worked my way through a javascript tutorial ( as of now I'm 28% through) and put together a rock paper scissors game. It was part of the tutorial so this weekend I'm going to push myself and put together a similar game from scratch. Javascript ( and jquery I'm finding out) are fairly complex. In my dealings with python and java, I'd never gotten far enough to deal with interfacing with other coding languages, or visual elements. I'm feeling a mix of excitement, and apprehension. This is a huge task, and I'm excited with the progress I've made. My biggest fear is that I'm approaching with javascript, the point at which I left Python in the past. A part of me is irrationally afraid that the more arcane concepts ( object oriented code, arrays, and others) are too much for me to handle. But I know this is nonsense and as long as I'm dilligent in practice, and keep working, I'll figure it out. Thanks for reading, I'm excited to post again this next weekend when I've got something visually interesting to talk about, and maybe even show someone. We'll see.
-	</p>
-</body>
+    <body>
+        <div id="example"></div>
+
+<script id="template" type="text/ractive">
+<nav class="navbar navbar-default">
+  <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand">
+            <span class="label label-default">UA</span> UA Web Notify Demo: Prod Goat
+        </a>
+      </div>
+      {{#if sdk}}
+      {{#if !channel.optedIn}}
+        {{#if secure}}
+            <button on-click="sdk.register()" type="button" class="btn btn-default navbar-btn navbar-right">Register</button>
+        {{else}}
+            <p class="navbar-text navbar-right">
+                <a target="_blank" href="{{registrationURL}}">Register on secure site</a>
+            </p>
+        {{/if}}
+
+      {{else}}
+        <p class="navbar-text navbar-right"><a on-click="channel.optOut()">opt out of push</a></p>
+      {{/if}}
+      {{/if}}
+  </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+    {{#each tags}}
+        <div class="container col-md-4">
+        <div class="well">
+            <h3>{{this}}
+            <small class="pull-right">
+            {{#if channel.optedIn}}
+                {{#if channel.tags.has(this)}}
+                    ☑️&nbsp;&nbsp;Subscribed <a on-click="channel.tags.remove(this)" class="close" style="float:none;" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                {{else}}
+                    <a on-click="channel.tags.add(this)">Subscribe</a>
+                {{/if}}
+            {{/if}}
+            </small>
+            </h3>
+            <p>
+              Get the latest {{this}} updates.
+            </p>
+        </div>
+        </div>
+    {{/each}}
+    </div>
+
+    <div class="row">
+        <div class="container">
+        <p>
+            {{#if channel}}
+                {{#if channel.namedUser.id}}
+                named_user: <b>{{channel.namedUser.id}}</b> <a on-click="channel.namedUser.remove()" class="label label-default">𝗫</a>
+                {{else}}
+                set named_user: <input value="{{user}}"> <button on-click="channel.namedUser.set(user)" class="btn">set</button>
+                {{/if}}
+            {{/if}}
+        </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="container">
+            <p><button class="btn" on-click="@this.customEvent(@event)">Click me for custom event</button></p>
+        </div>
+    </div>
+
+{{#if channel}}
+<pre>
+ID: {{channel.id}}
+optedIn: {{channel.optedIn}}
+namedUser: {{channel.namedUser.id}}
+{{#if channel.tags.list}}TAGS:
+    {{#each channel.tags.list:group}}{{group}}: {{JSON.stringify(this)}}{{/each}}
+{{/if}}
+&nbsp;
+{{JSON.stringify(channel, null, 2)}}
+{{#if push}}
+--
+Latest push:
+{{JSON.stringify(push, null, 2)}}
+{{/if}}
+{{#if customEvent}}
+--
+Custom event sent:
+{{JSON.stringify(customEvent, null, 2)}}
+{{/if}}
+// You can open up your web inspector and add/remove tags to channel in the
+// console with these commands:
+> UA.then(sdk => sdk.channel.tags.add('your-tag'))
+> UA.then(sdk => sdk.channel.tags.remove('your-tag'))
+</pre>
+<small><a class="text-muted" on-click="@this.clear()">Clear local storage</a></small>
+{{/if}}
+</div>
+
+
+</script>
+        <script type="text/javascript">
+            const options = {
+                appKey: 'ISex_TTJRuarzs9-o_Gkhg',
+                token: 'MTpJU2V4X1RUSlJ1YXJ6czktb19Ha2hnOkZyc3F4THdzVzNUWDBnZkZMZ2MwTG9BY2dkQ0t0STR2VnJ6Tm9lS2QtZGM',
+                apiUrl: 'https://web-push-api.urbanairship.com',
+                vapidPublicKey: 'BFAX8NDGwnWeDbTsGjn6TpCmY6uoJ8SXrexaQR3MR+OU6TwbbjgWDKaZuxturl2CvbU7QTOb4NiD5w1YxOMoLB4=',
+                debug: false,
+                workerUrl: '/_demo-prod/push-worker.js',
+                websitePushId: 'web.com.urbanairship.safari.test',
+                
+                secureIframeUrl: 'https://d2ob6tofij0erf.cloudfront.net/_demo-prod/secure-bridge.html'
+            }
+
+            !function(n,t,c,e,u){function r(n){try{f=n(u)}catch(n){return h=n,void i(p,n)}i(s,f)}function i(n,t){for(var c=0;c<n.length;c++)d(n[c],t);
+            }function o(n,t){return n&&(f?d(n,f):s.push(n)),t&&(h?d(t,h):p.push(t)),l}function a(n){return o(!1,n)}function d(t,c){
+            n.setTimeout(function(){t(c)},0)}var f,h,s=[],p=[],l={then:o,catch:a,_setup:r};n[e]=l;var v=t.createElement("script");
+            v.src=c,v.async=!0,v.id="_uasdk",v.rel=e,t.head.appendChild(v)}(window,document,'https://web-sdk.urbanairship.com/notify/v1/ua-sdk.min.js',
+              'UA', options)
+        </script>
+        <script src="lib/ractive.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            const ractive = new Ractive({
+                el: '#example',
+                template: '#template',
+                data: {
+                    tags: ['Basketball', 'Politics', 'Potent Potables'],
+                    channel: null,
+                    sdk: null,
+                    push: null,
+                    user: null,
+                    customEvent: null,
+                    registrationURL: 'https://d2ob6tofij0erf.cloudfront.net/_demo-prod/index.html',
+                    secure: !!window.location.protocol.match('https')
+                },
+                // Just for demo purposes
+                clear: () => {localStorage.clear(); location.reload()},
+                customEvent: ev => {
+                    console.log(ev)
+                    UA.then(sdk => {
+                        const c = new sdk.CustomEvent('demo_page_button', 1, {
+                            x: ev.offsetX,
+                            y: ev.offsetY
+                        })
+                        ractive.set('customEvent', c.toJSON())
+                        c.track()
+                    })
+                }
+            })
+
+            UA.then(function(sdk) {
+                ractive.set({sdk: sdk, channel: sdk.channel})
+                sdk.addEventListener('channel', ev => ractive.set({channel: ev.channel}))
+                sdk.addEventListener('tags', ev => ractive.update('channel.tags'))
+                sdk.addEventListener('push', ev => ractive.set('push', ev.push))
+            }).catch(function(e) {
+                console.log(e)
+            }).catch(function(e) {
+                console.log('STILL BAD', e)
+            })
+
+        </script>
+    </body>
+</html>
