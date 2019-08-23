@@ -3,62 +3,21 @@
   <head>
     <meta charset="UTF-8">
     <title>Example Site</title>
-
-    <script type="text/javascript">
-    // 86acbd31cd7c09cf30acb66d2fbedc91daa48b86:1547590949.48
-    !function(n,t,c,e,u){function r(n){try{f=n(u)}catch(n){return h=n,void i(p,n)}i(s,f)}function i(n,t){for(var c=0;c<n.length;c++)d(n[c],t);
-    }function o(n,t){return n&&(f?d(n,f):s.push(n)),t&&(h?d(t,h):p.push(t)),l}function a(n){return o(!1,n)}function d(t,c){
-    n.setTimeout(function(){t(c)},0)}var f,h,s=[],p=[],l={then:o,catch:a,_setup:r};n[e]=l;var v=t.createElement("script");
-    v.src=c,v.async=!0,v.id="_uasdk",v.rel=e,t.head.appendChild(v)}(window,document,'https://web-sdk.urbanairship.com/notify/v1/ua-sdk.min.js',
-      'UA', {
-        appKey: 'AK_nZV_7TmqG5Ncfk7SCGA',
-        token: 'MTpBS19uWlZfN1RtcUc1TmNmazdTQ0dBOmVsZkVNdzBRMzd4X2dtVkRJaklvbE5EY1lnZDhuQmxHVmlKdk54bmw4dU0',
-        vapidPublicKey: 'BBRg2SjILUkFBjjFg0ExJ_zcBFQRGCqDjlpvgsZQkSOruKT2ax5FUTlLcR3sIKfckwguoqLYoAQALadJAY-MS5A='
-      });
-
-    </script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js" type="text/javascript"></script>
   </head>
   <body>
-    <h1>This is my site</h1>
-    <button id="register">register</button>
-    <button id="eat">eat</button>
-    <button id="direct">Hit me from direct push session</button>
-    <button id="indirect">Hit me from indirect push session</button>
-    <script>
-    // Multiple calls have no additional expense.
-    UA.then(function(sdk) {
-      $('#register').show()
-      $('#register').click(function(ev) { sdk.register() })
-      $('#eat').click(function(ev) { const myEvent = new sdk.CustomEvent('ate_food')
-      myEvent.value = 34.5
-      myEvent.properties.breakfast = 'pancakes'
-      myEvent.track()
-        .catch(err => {
-          // see validate() below
-        }) })
-      $('#direct').click(function(ev) { const myEvent = new sdk.CustomEvent('ate_direct')
-      myEvent.value = 10
-      myEvent.properties.breakfast = 'tofuscramble'
-      myEvent.track()
-        .catch(err => {
-          // see validate() below
-        }) })
-      $('#indirect').click(function(ev) { const myEvent = new sdk.CustomEvent('ate_indirect')
-      myEvent.value = 10
-      myEvent.properties.breakfast = 'biscuits'
-      myEvent.track()
-        .catch(err => {
-          // see validate() below
-        }) })
-
-    })
-    UA.then(function(sdk) {
-      console.log(sdk.channel.id)
-    }).catch(function(err) {
-      console.log(err)
-    })
-    </script>
   </body>
+
+<script type="text/javascript">
+// 86acbd31cd7c09cf30acb66d2fbedc91daa48b86:1566602012.658806
+!function(n,t,c,e,u){function r(n){try{f=n(u)}catch(n){return h=n,void i(p,n)}i(s,f)}function i(n,t){for(var c=0;c<n.length;c++)d(n[c],t);
+}function o(n,t){return n&&(f?d(n,f):s.push(n)),t&&(h?d(t,h):p.push(t)),l}function a(n){return o(!1,n)}function d(t,c){
+n.setTimeout(function(){t(c)},0)}var f,h,s=[],p=[],l={then:o,catch:a,_setup:r};n[e]=l;var v=t.createElement("script");
+v.src=c,v.async=!0,v.id="_uasdk",v.rel=e,t.head.appendChild(v)}(window,document,'https://aswpsdkus.com/notify/v1/ua-sdk.min.js',
+  'UA', {
+    vapidPublicKey: 'BD4ckQoDwA4oEQMTPfPePJiyjSLHsYDDiH3wFx-7psyzERrW0nveDYmz0fxSd8MnxwSXjvrR8cAQC6JcBR_Lkyo=',
+    appKey: 'bgWeRD4nS6qP42TrMtxOng',
+    token: 'MTpiZ1dlUkQ0blM2cVA0MlRyTXR4T25nOmhUdHJrenVIODc1aVlCVGVlMWlLRU5aQy1qU3Bkd3pUZ0JsZkl0RWdZM28'
+  });
+
+</script>
 </html>
