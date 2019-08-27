@@ -16,6 +16,21 @@ v.src=c,v.async=!0,v.id="_uasdk",v.rel=e,t.head.appendChild(v)}(window,document,
     appKey: 'bgWeRD4nS6qP42TrMtxOng',
     token: 'MTpiZ1dlUkQ0blM2cVA0MlRyTXR4T25nOmhUdHJrenVIODc1aVlCVGVlMWlLRU5aQy1qU3Bkd3pUZ0JsZkl0RWdZM28'
   });
+
+UA.then(function(sdk) {
+  console.log(sdk.channel.id)
+}).catch(function(err) {
+  console.log(err)
+})
+
+// Multiple calls have no additional expense.
+UA.then(function(sdk) {
+  $('#register').show()
+  $('#register').click(function(ev) { sdk.register() })
+})
+
+
+  </script>
   <body>
   <img src="https://vignette.wikia.nocookie.net/bojackhorseman/images/1/1f/Vincentadultmancropped.png/revision/latest?cb=20190117013957">
   </body>
