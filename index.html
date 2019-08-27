@@ -4,21 +4,8 @@
     <meta charset="UTF-8">
     <title>Adultman Industries</title>
   </head>
-
-  <script type="text/javascript">
-// 86acbd31cd7c09cf30acb66d2fbedc91daa48b86:1566602012.658806
-!function(n,t,c,e,u){function r(n){try{f=n(u)}catch(n){return h=n,void i(p,n)}i(s,f)}function i(n,t){for(var c=0;c<n.length;c++)d(n[c],t);
-}function o(n,t){return n&&(f?d(n,f):s.push(n)),t&&(h?d(t,h):p.push(t)),l}function a(n){return o(!1,n)}function d(t,c){
-n.setTimeout(function(){t(c)},0)}var f,h,s=[],p=[],l={then:o,catch:a,_setup:r};n[e]=l;var v=t.createElement("script");
-v.src=c,v.async=!0,v.id="_uasdk",v.rel=e,t.head.appendChild(v)}(window,document,'https://aswpsdkus.com/notify/v1/ua-sdk.min.js',
-  'UA', {
-    vapidPublicKey: 'BD4ckQoDwA4oEQMTPfPePJiyjSLHsYDDiH3wFx-7psyzERrW0nveDYmz0fxSd8MnxwSXjvrR8cAQC6JcBR_Lkyo=',
-    appKey: 'bgWeRD4nS6qP42TrMtxOng',
-    token: 'MTpiZ1dlUkQ0blM2cVA0MlRyTXR4T25nOmhUdHJrenVIODc1aVlCVGVlMWlLRU5aQy1qU3Bkd3pUZ0JsZkl0RWdZM28'
-  });
-  
-  </script>
   <body>
+  <h1>God dammit<h1>
   </body>
 
 <script type="text/javascript">
@@ -32,5 +19,65 @@ v.src=c,v.async=!0,v.id="_uasdk",v.rel=e,t.head.appendChild(v)}(window,document,
     appKey: 'bgWeRD4nS6qP42TrMtxOng',
     token: 'MTpiZ1dlUkQ0blM2cVA0MlRyTXR4T25nOmhUdHJrenVIODc1aVlCVGVlMWlLRU5aQy1qU3Bkd3pUZ0JsZkl0RWdZM28'
   });
+
+   UA.then(function(sdk) {
+      console.log(sdk.channel.id);
+    }).catch(function(err) {
+      console.log(err);
+    });
+     
+    // Multiple calls have no additional expense.
+    UA.then(function(sdk) {
+//    if (polopoly && polopoly.user.isLoggedIn()) {
+        sdk.register();
+//    }
+    });
+     
+    // Filter Out Non-Compliant Browsers
+    UA.then(function(sdk) {
+        sdk.isSupported;
+    });
+     
+    UA.then(function(sdk) {
+      sdk.addEventListener('channel', function(ev) {
+        ev.channel === sdk.channel; // fires a channel event when a channel is registered, loaded or changed
+      });
+      sdk.addEventListener('tags', function(ev) {
+        ev.tags === sdk.channel.tags.list; // fires a tags event any time the tags change.
+      });
+      sdk.addEventListener('push', function(ev) {
+        // ev.push is the push payload object
+      });
+    });
+     
+    UA.then(function(sdk) {
+      // Return the current Channel ID
+      sdk.channel.id; // Returns String
+     
+      // Return the opted-in status
+      sdk.channel.optedIn; // Returns bool
+     
+      // Opt this device out of Web Notify
+      sdk.channel.optOut(); // Returns true if successful
+      // In order to opt back in you must call `sdk.register()` again.
+     
+      // Opt this device in for Web Notify
+      sdk.channel.register(); // Returns bool
+    });
+     
+    UA.then(function(sdk) {
+      // Return the current Named User
+      sdk.channel.namedUser.id  // Returns null or string
+     
+      // Set the Named User to a String
+      sdk.channel.namedUser.set(name) // associates this channel with a named user
+     
+      // Remove the currently associated Named User
+      sdk.channel.namedUser.remove() // Disassociates the channel from the named user
+      // Returns true if successful
+    });
+
+
 </script>
 </html>
+  
